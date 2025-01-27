@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        /* Ваши стили остаются такими же */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ddd;
+            line-height: 1.6;
+            font-size: 1.2rem;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            background: #ff6f61;
+            transform: scale(1.1);
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 3rem 1rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .profile-container img {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .profile-container p {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 0;
+            color: #fff;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-icons a {
+            font-size: 2rem;
+            color: #fff;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff6f61;
+            transform: scale(1.2);
+        }
+
+        .profession-container {
+            margin-top: 3rem;
+            background: #333;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff6f61;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .trend-section {
+            background-color: #444;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 4rem;
+        }
+
+        .trend-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ff6f61;
+        }
+
+        .trend-section p {
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .trend-section ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .trend-section ul li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .contact-form h3 {
+            text-align: center;
+            color: #ff6f61;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #555;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #ff4a3c;
+        }
+    </style>
+    <title>Портфолио начинающего разработчика</title>
+</head>
+<body>
+
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="menu">
+            <a href="#me">Я</a>
+            <a href="#about">Обо мне</a>
+            <a href="#it-professions">IT профессии</a>
+            <a href="#it-trends">Тренды в IT</a>
+            <a href="#web-development">Веб-разработка</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Раздел "Я" -->
+        <section id="me">
+            <h2 class="fade-in">Привет! Я начинающий разработчик</h2>
+            <div class="profile-container fade-in">
+                <img src="profile.jpg" alt="Моё фото">
+                <p>Меня зовут Данилов Данил, мне 15 лет. Я изучаю веб-разработку и стремлюсь стать профессионалом в этой области. Моя цель — создавать удобные и эффективные веб-приложения, которые решают реальные задачи.</p>
+            </div>
+        </section>
+
+        <!-- Раздел "О веб-разработке" -->
+        <section id="web-development">
+            <h2 class="fade-in">Веб-разработка</h2>
+            <div class="trend-section">
+                <h3>Что такое веб-разработка?</h3>
+                <p>Веб-разработка — это процесс создания, проектирования и обслуживания веб-сайтов и веб-приложений. Веб-разработчик отвечает за все, что происходит на веб-странице, от создания пользовательского интерфейса (frontend) до взаимодействия с сервером (backend).</p>
+                <p>Веб-разработка может быть разделена на два основных направления:</p>
+                <ul>
+                    <li><strong>Frontend-разработка:</strong> Это создание интерфейса, с которым взаимодействуют пользователи. Включает HTML, CSS, JavaScript и фреймворки, такие как React или Vue.js.</li>
+                    <li><strong>Backend-разработка:</strong> Это работа с серверной частью веб-приложений, включая базы данных, обработку данных и управление сервером. Используются языки, такие как Python, Ruby, PHP, и фреймворки, например, Node.js или Django.</li>
+                </ul>
+
+                <h3>Почему стоит стать веб-разработчиком?</h3>
+                <p>Веб-разработка — это одна из самых востребованных профессий в мире. С каждым годом все больше компаний переходят в онлайн, и потребность в разработчиках растет. Вот несколько причин, почему стоит заниматься веб-разработкой:</p>
+                <ul>
+                    <li><strong>Большие возможности для карьерного роста:</strong> Веб-разработчики могут работать в различных областях, начиная от стартапов до крупных корпораций.</li>
+                    <li><strong>Высокая зарплата:</strong> Веб-разработчики получают конкурентоспособные заработные платы, которые увеличиваются с опытом.</li>
+                    <li><strong>Гибкость работы:</strong> Множество веб-разработчиков работают удаленно, что дает свободу выбора места работы.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Раздел "Обо мне" -->
+        <section id="about">
+            <h2>Обо мне</h2>
+            <p>Я увлечённо изучаю технологии, связанные с веб-разработкой. Моя цель — создавать простые и удобные веб-приложения, которые приносят пользу людям. На данный момент я изучаю:</p>
+            <ul>
+                <li>HTML, CSS и JavaScript</li>
+                <li>React и Vue.js</li>
+                <li>Основы серверной разработки</li>
+            </ul>
+        </section>
+
+        <!-- Раздел "IT профессии" -->
+        <section id="it-professions">
+            <h2>Популярные профессии в IT</h2>
+            <div class="profession-container">
+                <h3>Разработчик</h3>
+                <h4>Frontend-разработчик</h4>
+                <p>Занимается созданием пользовательских интерфейсов и веб-приложений с использованием HTML, CSS, JavaScript и популярных фреймворков.</p>
+
+                <h4>Backend-разработчик</h4>
+                <p>Занимается серверной частью веб-приложений, разработкой логики, взаимодействием с базами данных.</p>
+            </div>
+        </section>
+
+        <!-- Раздел "IT Тренды" -->
+        <section id="it-trends">
+            <h2>Тренды в IT</h2>
+            <div class="trend-section">
+                <h3>Актуальные тренды в области технологий</h3>
+                <ul>
+                    <li><strong>Искусственный интеллект:</strong> AI продолжает влиять на все отрасли, включая веб-разработку.</li>
+                    <li><strong>Прогрессивные веб-приложения:</strong> Создание приложений с улучшенным пользовательским опытом.</li>
+                    <li><strong>Serverless-технологии:</strong> Разработка без необходимости управления серверами.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Раздел "Свяжитесь со мной" -->
+        <footer>
+
+            <div class="contact-form">
+                <h3>Свяжитесь со мной</h3>
+                <form>
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+
+                    <label for="email">Ваш email</label>
+                    <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+
+                    <label for="message">Ваше сообщение</label>
+                    <textarea id="message" name="message" placeholder="Введите ваше сообщение" rows="4" required></textarea>
+
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            emailjs.init("oVqH73GZ4h-OzYtYP"); // Замените на ваш user_id из EmailJS
+        })();
+
+        document.querySelector(".contact-form form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Предотвращает перезагрузку страницы
+
+            const formData = new FormData(this);
+            const data = {
+                from_name: formData.get('name'),
+                from_email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            emailjs.send("oVqH73GZ4h-OzYtYP", "template_c7echeh", data)
+                .then(function(response) {
+                    alert("Сообщение отправлено успешно!");
+                }, function(error) {
+                    alert("Произошла ошибка, попробуйте позже.");
+                });
+        });
+    </script>
+
+</body>
+</html>
